@@ -10,7 +10,7 @@ export const connectDB = async():Promise<void> =>{
             return 
       }
       try {
-            const db = await mongoose.connect(`${process.env.MONGO_URI}`)
+            const db = await mongoose.connect(`${process.env.MONGO_URI}/mystery-app`)
             connection.isConnected = db.connections[0].readyState
             console.log("MongoDB connected successfully")
       } catch (error) {
