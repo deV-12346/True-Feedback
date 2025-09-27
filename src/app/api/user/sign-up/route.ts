@@ -4,7 +4,6 @@ import { UserModel } from "@/model/User.Model";
 import { signUpSchema } from "@/schemas/signupSchema";
 import bcrypt from "bcryptjs";
 
-
 export async function POST(req:Request)  {
       await connectDB()
       try {
