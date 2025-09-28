@@ -5,8 +5,7 @@ import { User } from "next-auth";
 import { connectDB } from "@/lib/dbConnect";
 import { UserModel } from "@/model/User.Model";
 import { acceptingMessagesSchema } from "@/schemas/acceptingMessage";
-import { use } from "react";
-import { success } from "zod";
+
 
 export async function POST(req:Request){
       await connectDB()
@@ -71,7 +70,7 @@ export async function GET(){
                   return NextResponse.json({
                         success:false,
                         message:"User not found"
-                  },{status:404})
+                  },{status:401})
             }
             return NextResponse.json({
                   sucess:true,
