@@ -6,15 +6,15 @@ import { NextResponse } from "next/server";
 export async function POST(req:Request){
       await connectDB()
       try {
-           const body = await req.json()
-           const result = verifySchema.safeParse(body)
+           const {username,verifyCode} = await req.json()
+            console.log(username,verifyCode)
+           const result = verifySchema.safeParse({verifyCode})
            if(!result.success){
                  return NextResponse.json({
                   success:false,
                   message:result.error.issues[0].message
                  },{status:400})
            }
-           const {username,verifyCode} = result.data
            const user = await UserModel.findOne({username:username}) 
            if(!user){
                return NextResponse.json({

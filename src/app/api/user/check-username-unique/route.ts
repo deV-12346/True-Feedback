@@ -17,7 +17,7 @@ export async function GET(req:Request){
            const result = usernameQuerySchema.safeParse(queryParams)
 
            if(!result.success){
-            const usernameError = result.error.format().username?._errors || []
+            const usernameError = result.error.issues[0].message || []
             console.log(usernameError)
                return NextResponse.json({
                   success:false,
