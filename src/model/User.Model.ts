@@ -3,7 +3,7 @@ export interface Message extends Document{
       content:string,
       createdAt:Date
 }
-const messageSchema:Schema <Message> = new Schema({
+export const messageSchema:Schema <Message> = new Schema({
       content:{
             type:String,
             required:true
