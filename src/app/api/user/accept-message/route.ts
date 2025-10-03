@@ -18,7 +18,7 @@ export async function POST(req:Request){
                   message:"Not Authenticated"
             },{status:401})
       }
-      const userId = user?.id
+      const userId = user?._id
       try {
             const body = await req.json()
             const result = acceptingMessagesSchema.safeParse(body) 
@@ -29,6 +29,7 @@ export async function POST(req:Request){
                   },{status:400})
             }
             const {isAcceptingMessages} = result.data
+            console.log(isAcceptingMessages)
             const updatedUser = await UserModel.findByIdAndUpdate(
                   userId,
                   {isAcceptingMessages:isAcceptingMessages},
@@ -73,7 +74,7 @@ export async function GET(){
                   },{status:401})
             }
             return NextResponse.json({
-                  sucess:true,
+                  success:true,
                   isAcceptingMessages:foundUser.isAcceptingMessages
             },{status:200})
       } catch (error) {

@@ -20,7 +20,7 @@ export async function GET(req:Request) {
       try {
             const userMessages = await UserModel.aggregate([
                   {$match:{_id:userId}},
-                  {$unwind:"messages"},
+                  {$unwind:"$messages"},
                   {$sort:{"messages.createdAt": -1}},
                   {$group:{_id:"$_id",messages:{$push:"$messages"}}}
             ])

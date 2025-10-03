@@ -7,6 +7,7 @@ export async function POST(req:Request) {
       await connectDB()
       try {
             const {username,content} = await req.json()
+            console.log(username,content)
             const result = messagesSchema.safeParse({content})
             if(!result.success){
                   return NextResponse.json({

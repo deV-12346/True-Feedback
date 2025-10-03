@@ -27,14 +27,11 @@ const Dashboard = () => {
   const {data:session} = useSession()
 
   const form = useForm({
-    resolver:zodResolver(acceptingMessagesSchema),
-    defaultValues:{
-      isAcceptingMessages:false
-    }
+    resolver:zodResolver(acceptingMessagesSchema)
   })
 
   const {register,watch,setValue} = form
-  const acceptMessages = watch("acceptMessages") 
+  const isAcceptingMessages = watch("isAcceptingMessages") 
 
 
   const fetchAcceptingMessage = useCallback(async()=>{
@@ -42,7 +39,7 @@ const Dashboard = () => {
         try{
            const response = await axios.get("/api/user/accept-message")
            if(response.data.success){
-           setValue("acceptMessages",response.data.isAcceptingMessages)
+           setValue("isAcceptingMessages",response.data.isAcceptingMessages)
            }
         }catch(err){
             const axiosError = err as  AxiosError<ApiResponse> 
@@ -55,9 +52,8 @@ const Dashboard = () => {
 
   const fetchMessages = useCallback(async(refresh:boolean= false)=>{
       setIsLoading(true)
-      setisSwitching(false)
       try {
-        const response = await axios.get("/api/messages/get-message")
+        const response = await axios.get("/api/messages/get-messages")
         setMessages(response.data.messages || [])
         if(refresh){
           toast.success(response.data.message)
@@ -78,10 +74,10 @@ const Dashboard = () => {
         fetchMessages()
   },[session,setValue,fetchAcceptingMessage,fetchMessages])
 
-  const handleSwitchChange = async(value:boolean)=>{
+  const handleSwitchChange = async()=>{
     try {
-      const response =  await axios.post("/api/user/accept-message",{isAcceptingMessages:value})
-      setValue("acceptMessages",value)
+      const response =  await axios.post("/api/user/accept-message",{isAcceptingMessages:!isAcceptingMessages})
+      setValue("isAcceptingMessages",!isAcceptingMessages)
       toast.success(response.data.message)
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>
@@ -121,13 +117,13 @@ const Dashboard = () => {
 
       <div className="mb-4">
         <Switch
-          // {...register('acceptMessages')}
-          checked={acceptMessages}
+          {...register('isAcceptingMessages')}
+          checked={isAcceptingMessages}
           onCheckedChange={handleSwitchChange}
           disabled={isSwitching}
         />
         <span className="ml-2">
-          Accept Messages: {acceptMessages ? 'On' : 'Off'}
+          Accept Messages: {isAcceptingMessages ? 'On' : 'Off'}
         </span>
       </div>
       <Separator />

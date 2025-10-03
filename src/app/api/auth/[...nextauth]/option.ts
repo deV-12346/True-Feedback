@@ -7,8 +7,8 @@ import { UserModel } from "@/model/User.Model"
 export const authOptions: NextAuthOptions = {
       providers: [
             CredentialsProvider({
-                  id: "credentails",
-                  name: "Credentails",
+                  id: "credentials",
+                  name: "Credentials",
                   credentials: {
                         email: {type: "text",placeholder:"Username or Email"},
                         password: { type: "password",placeholder:"Password"}
@@ -49,6 +49,7 @@ export const authOptions: NextAuthOptions = {
                         token.isAcceptingMeassages = user.isAcceptingMessages
                         token.username = user.username
                   }
+                  console.log(token)
                   return token
             },
             async session({ session, token }) {
@@ -62,7 +63,7 @@ export const authOptions: NextAuthOptions = {
             }
       },
       pages: {
-            signIn: "/auth/sign-in"
+            signIn: "/sign-in"
       },
       session: {
             strategy: "jwt"

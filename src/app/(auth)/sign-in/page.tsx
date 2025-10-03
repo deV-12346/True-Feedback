@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -24,7 +24,7 @@ const Signin = () => {
       })
       const onSubmit = async (data: z.infer<typeof signInSchema>) => {
             setSumitting(true)
-            const res = await signIn("credentails", {
+            const res = await signIn("credentials", {
                   redirect: false,
                   identifier: data.identifier,
                   password: data.password
@@ -34,9 +34,10 @@ const Signin = () => {
                   toast.error(res.error)
             }
             setSumitting(false)
-            if (res?.url) {
+            if (res?.ok) {
                   toast.success("Log in success")
-                  router.replace("/dashboard")
+                  redirect("/dashboard")
+                  // router.replace("/dashboard")
             }
       }
       return (
