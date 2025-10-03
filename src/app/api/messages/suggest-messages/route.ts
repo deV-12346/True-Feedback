@@ -1,5 +1,5 @@
 import { openai } from '@ai-sdk/openai';
-import { streamText, UIMessage, convertToModelMessages } from 'ai';
+import { streamText } from 'ai';
 import { NextResponse } from 'next/server';
 
 // Allow streaming responses up to 30 seconds

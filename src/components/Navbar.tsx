@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation'
 const Navbar = () => {
   const {data:session} = useSession()
   const user:User = session?.user as User
-  const router = useRouter()
   console.log(user)
   return (
     <div className='w-full flex flex-col sm:flex-row justify-between sm:justify-evenly gap-2 md:gap-0 items-center py-4 border-b-2  shadow-xl shadow-gray-300 '>
