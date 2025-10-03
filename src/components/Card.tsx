@@ -12,13 +12,14 @@ import {
 import { Message } from '@/model/User.Model'
 import axios from "axios"
 import { toast } from 'sonner'
+import { ApiResponse } from '@/types/ApiResponse'
 type messageCardProps = {
       message: Message,
       handleDeleteMessage:(messageID:string)=>void
 }
 const MessageCard = ({message,handleDeleteMessage}:messageCardProps) => {
       const onMessageDeleteConfirm = async() =>{
-            const res = axios.delete(`/api/message/delete-message/${message._id}`)
+            const res = axios.delete<ApiResponse>(`/api/message/delete-message/${message._id}`)
             toast.success(res.data?.message || "Message deleted")
             handleDeleteMessage(message._id)
       }
@@ -34,7 +35,7 @@ const MessageCard = ({message,handleDeleteMessage}:messageCardProps) => {
                   <p>{message.content}</p>
                   </CardContent> */}
                   <CardFooter>
-                  <p>{new Date (message.createdAt)}</p>
+                  <p>{new Date (message.createdAt).toLocaleString()}</p>
                   </CardFooter>
             </Card>
             </div>

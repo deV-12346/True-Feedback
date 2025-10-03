@@ -13,7 +13,7 @@ const Navbar = () => {
   console.log(user)
   return (
     <div className='w-full flex flex-col sm:flex-row justify-between sm:justify-evenly gap-2 md:gap-0 items-center py-4 border-b-2  shadow-xl shadow-gray-300 '>
-        <a href="#" className='font-extrabold text-xl text-black'>My Stery Message</a>
+        <a href="#" className='font-extrabold text-xl text-black'>MyStery Message</a>
         <div className='flex justify-center items-center gap-3'>
         {
           session ?

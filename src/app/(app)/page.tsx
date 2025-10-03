@@ -13,11 +13,11 @@ import messages from '../../types/messages.json';
 const page = () => {
   return (
     <>
-    <div className='flex flex-col items-center justify-center px-4 md:px-24 py-12'>
+    <div className='flex flex-col items-center justify-between px-4 md:px-24 py-12'>
       <section className='text-center mb-8 md:mb-12'>
         <h1 className='text-black font-extrabold text-xl md:text-4xl mb-4'>
           Dive into the world of anonmymous converstions</h1>
-        <p className='text-l md:text-2xl'>Explore Mystery Message - where your identity remains secret</p>
+        <p className='my-3 text-[18px] md:text-2xl text-cyan-600 font-medium text-center'>Explore Mystery Message - where your identity remains secret</p>
       </section>
        <Carousel className="w-full max-w-xs" plugins={[Autoplay({delay:3000})]}>
       <CarouselContent>
@@ -44,7 +44,7 @@ const page = () => {
     </Carousel>
     </div>
     <footer className="text-center p-4 md:p-12 text-black font-light">
-    Mystery Messages. All right reserved.
+   &copy;  Mystery Messages. All right reserved.
     </footer>
     </>
   )

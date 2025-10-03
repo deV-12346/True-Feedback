@@ -36,8 +36,8 @@ const Signin = () => {
             setSumitting(false)
             if (res?.ok) {
                   toast.success("Log in success")
-                  redirect("/dashboard")
-                  // router.replace("/dashboard")
+                  // redirect("/dashboard")
+                  router.replace("/dashboard")
             }
       }
       return (
